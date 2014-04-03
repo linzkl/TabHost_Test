@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" name="Failed suite [Wellsfargo_Test]" parallel="true" allow-return-values="true">
+  <parameter name="remoteBrowserType" value="Chrome"/>
+  <test name="wellsfargo(failed)" parallel="true">
+    <parameter name="remoteBrowserType" value="Chrome"/>
+    <classes>
+      <class name="com.wellsfargo.test.HomeLendingTests">
+        <methods>
+          <include name="tearDown"/>
+          <include name="testHomeLending"/>
+          <include name="navigate"/>
+          <include name="browserWait"/>
+          <include name="setup"/>
+          <include name="testHomePage"/>
+        </methods>
+      </class> <!-- com.wellsfargo.test.HomeLendingTests -->
+    </classes>
+  </test> <!-- wellsfargo(failed) -->
+</suite> <!-- Failed suite [Wellsfargo_Test] -->
