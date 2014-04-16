@@ -1,5 +1,6 @@
 package com.wellsfargo.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.log4testng.Logger;
+
 
 public class GetFinancingThatMeetsYourNeedsResultsPage {
 	private WebDriver driver;
@@ -38,16 +39,16 @@ public class GetFinancingThatMeetsYourNeedsResultsPage {
 	@CacheLookup
 	WebElement returnToResultBtn;
 	
-	Logger logger = Logger.getLogger(GetFinancingThatMeetsYourNeedsResultsPage.class);
+	private Logger logger = Logger.getLogger(GetFinancingThatMeetsYourNeedsResultsPage.class);
 	
 	public GetFinancingThatMeetsYourNeedsResultsPage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
-		System.out.println("GetFinancingThatMeetsYourNeedsResults initialized");
+		logger.info("GetFinancingThatMeetsYourNeedsResults initialized");
 	}
 	
 	public void CompareResults(){
-		System.out.println(firstCheckBoxTag.toString());
+		logger.info(firstCheckBoxTag.toString());
 		firstCheckBoxTag.click();
 		secondCheckBoxTag.click();
 		compareBtn.click();
@@ -55,25 +56,25 @@ public class GetFinancingThatMeetsYourNeedsResultsPage {
 		try{
 			resultTable.click();
 			//viewAsTableBtn.click();
-			System.out.println("View as a table verified");
+			logger.info("View as a table verified");
 			//logger.error("*******SJWI");
 		} catch (NoSuchElementException e){
-			//System.out.println("Can not find the table view");
+			//logger.info("Can not find the table view");
 			logger.error("Cannot find the table view");
 		}
 		try{
 			viewAsGraphBtn.click();
-			System.out.println("View as a graph verified");
+			logger.info("View as a graph verified");
 		} catch (NoSuchElementException e){
-			//System.out.println("Can not find the graph view");
+			//logger.info("Can not find the graph view");
 			logger.error("Cannot find the graph view");
 		}	
 		
 		try{
 			returnToResultBtn.click();
-			System.out.println("Back to result page");
+			logger.info("Back to result page");
 		} catch (NoSuchElementException e){
-			System.out.println("Return failed");
+			logger.info("Return failed");
 		}
 	}
 }

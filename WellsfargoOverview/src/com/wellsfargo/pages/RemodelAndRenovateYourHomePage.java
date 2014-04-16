@@ -1,5 +1,6 @@
 package com.wellsfargo.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 
 public class RemodelAndRenovateYourHomePage {
 	private WebDriver driver;
@@ -37,10 +39,12 @@ public class RemodelAndRenovateYourHomePage {
 	@CacheLookup
 	private WebElement whatShouldIConsiderWhenThinkingAboutMyHomeImprovementLoanOptions;
 	
+	private Logger logger = Logger.getLogger(RemodelAndRenovateYourHomePage.class);
+	
 	public RemodelAndRenovateYourHomePage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
-		System.out.println("Remodel and Renovate Your Home Page initialized");
+		logger.info("Remodel and Renovate Your Home Page initialized");
 	}
 	
 	public void verifyItems(){
@@ -51,22 +55,22 @@ public class RemodelAndRenovateYourHomePage {
 			howToApplyTag.click();
 			afterYouApplyTag.click();
 			afterYouCloseTag.click();
-			System.out.println("Remodel Elements Found");
+			logger.info("Remodel Elements Found");
 			for(int i=0;i<4;++i){
 				driver.navigate().back();
 			}
 			
 			} catch (NoSuchElementException e){
-			System.out.println("no found elements");
+				logger.info("no found elements");
 		}	
 	}
 	
 	public HomeLendingPage navigateToHomeLending(){
 		try{
 			overviewTag.click();
-			System.out.println("home lending overview page backed");
+			logger.info("home lending overview page backed");
 		}catch(NoSuchElementException e){
-			System.out.println("overview button not found");
+			logger.info("overview button not found");
 		}
 		return new HomeLendingPage(this.driver);
 	}
@@ -74,9 +78,9 @@ public class RemodelAndRenovateYourHomePage {
 	public WebDriver navigateToHomeLendingDriver(){
 		try{
 			overviewTag.click();
-			System.out.println("home lending overview page backed");
+			logger.info("home lending overview page backed");
 		}catch(NoSuchElementException e){
-			System.out.println("overview button not found");
+			logger.info("overview button not found");
 		}
 		return this.driver;
 	}

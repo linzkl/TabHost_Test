@@ -2,9 +2,11 @@ package com.wellsfargo.test;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.AfterMethod;
@@ -28,13 +30,13 @@ public class HomeLendingTests {
 	GetFinancingThatMeetsYourNeedsResultsPage GFTMYNRP;
 	private String baseURL = "https://www.wellsfargo.com/";
 	
-	//@Parameters({"remoteBrowserType"})
+	@Parameters({"remoteBrowserType"})
 	@BeforeClass(alwaysRun=true)
-	public void setup(){//String remoteBrowserType   remoteBrowserType
-		CM.openBrowser("chrome");
+	public void setup(String remoteBrowserType) throws Exception{//chrome   
+		//CM.openBrowser(remoteBrowserType);
 		System.out.println("chrome" + " started");//remoteBrowserType
 		PropertyConfigurator.configure("log4j.properties");
-		CM.navigateURL(baseURL);
+		CM.navigateToSite(remoteBrowserType);
 	}
 	
 	@BeforeMethod
@@ -75,13 +77,14 @@ public class HomeLendingTests {
 	}
 	
 	@AfterMethod
-	public void browserWait(){
+	public void browserWait(ITestResult it) throws Exception{
 		CM.getDriver().manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		CM.postResults(it);
 	}
 	
 	@AfterClass(alwaysRun=true)
 	public void tearDown(){
-		CM.quitBrowser();
+		CM.tearDown();
 		System.out.println("Browser closed");
 	}
 }

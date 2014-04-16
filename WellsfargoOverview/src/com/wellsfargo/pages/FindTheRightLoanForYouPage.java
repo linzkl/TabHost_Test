@@ -12,11 +12,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
+import org.testng.log4testng.Logger;
+
 import com.wellsfargo.common.CommonMethods;
+
 
 public class FindTheRightLoanForYouPage {
 	private WebDriver driver;
 	CommonMethods CM = new CommonMethods();
+	
 	
 	@FindBy(css="select#idLikeTo")
 	@CacheLookup
@@ -59,11 +64,13 @@ public class FindTheRightLoanForYouPage {
 	@CacheLookup
 	WebElement compareBtn;
 	
+	private Logger logger = Logger.getLogger(FindTheRightLoanForYouPage.class);
 	
 	public FindTheRightLoanForYouPage(WebDriver driver){
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
-		System.out.println("\"Find the Right Loan for You Page\" initialized");
+		
+		//logger.info("\"Find the Right Loan for You Page\" initialized");
 	}
 	
 	public WebDriver getDriver(){

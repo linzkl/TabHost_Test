@@ -13,6 +13,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.log4testng.Logger;
 
 import com.wellsfargo.common.CommonMethods;
 
@@ -32,12 +33,14 @@ public class HomeLendingPage {
 	@CacheLookup
 	private WebElement renovateOrRemodelYourHomeTag;
 	
+	private Logger logger = Logger.getLogger(HomeLendingPage.class);
+	
 	public HomeLendingPage(WebDriver driver){
 		
 		this.driver = driver;
 		PageFactory.initElements(this.driver, this);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		System.out.println("Home Lending Page initialized");
+		logger.info("Home Lending Page initialized");
 	}
 	
 	public void verifyGoalTags(){
@@ -46,20 +49,20 @@ public class HomeLendingPage {
 		try{
 			js.executeScript("return $(\"a[href='/mortgage/buying-a-house/']\").mouseover();");
 		} catch (NoSuchElementException e) {
-			System.out.println("\"Buy a Home\" not found");
+			logger.info("\"Buy a Home\" not found");
 		}
 		try{
 			buyAVacationHomeTag.click();
 			CM.verifyTitle(driver, "Mortgage | Vacation & Second Home Mortgage | Learn the Basics | Wells Fargo");
 			driver.navigate().back();
 		} catch (InterruptedException e){
-			System.out.println("\"Buy a vacation home\" not found");
+			logger.info("\"Buy a vacation home\" not found");
 		}
 		
 		try{
 			js.executeScript("return $(\"a[href='/mortgage/home-improvement-loans/']\").mouseover();");
 		} catch (NoSuchElementException e) {
-			System.out.println("\"Improve your home\" not found");
+			logger.info("\"Improve your home\" not found");
 		}
 		try{
 			renovateOrRemodelYourHomeTag.click();
@@ -70,22 +73,22 @@ public class HomeLendingPage {
 			
 			this.driver = RARYHP.navigateToHomeLendingDriver();
 			//driver.navigate().back();
-			System.out.println("navigated back");
+			logger.info("navigated back");
 			//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		} catch (InterruptedException e){
-			System.out.println("\"Renovate or remodel your home\" not found");
+			logger.info("\"Renovate or remodel your home\" not found");
 		}
 		
 		try{
 			js.executeScript("return $(\"a[href='/mortgage/debt-management/']\").mouseover();");
 		} catch (NoSuchElementException e) {
-			System.out.println("\"Manage Your Debt\" not found");
+			logger.info("\"Manage Your Debt\" not found");
 		}
 		try{
 			CM.verifyText(driver, "Pay Off Your Mortgage Sooner");
 			//buyAVacationHomeTag.getTagName()
 		} catch (NoSuchElementException e){
-			System.out.println("\"Pay Off Your Mortgage Sooner\" not found");
+			logger.info("\"Pay Off Your Mortgage Sooner\" not found");
 		}
 	}
 	
@@ -96,9 +99,9 @@ public class HomeLendingPage {
 	public FindTheRightLoanForYouPage navigateToFindRightLoan(){
 		try{
 			findTheRightLoanForYouTag.click();
-			System.out.println("\"Find the Right Loan for You Page\" button clicked");
+			logger.info("\"Find the Right Loan for You Page\" button clicked");
 		}catch(NoSuchElementException e){
-			System.out.println("\"Find the Right Loan for You Page\" navigate button not found");
+			logger.info("\"Find the Right Loan for You Page\" navigate button not found");
 		}
 		return new FindTheRightLoanForYouPage(this.driver);
 	}
@@ -106,9 +109,9 @@ public class HomeLendingPage {
 	public WebDriver navigateToFindRightLoanDriver(){
 		try{
 			findTheRightLoanForYouTag.click();
-			System.out.println("\"Find the Right Loan for You Page\" button clicked");
+			logger.info("\"Find the Right Loan for You Page\" button clicked");
 		}catch(NoSuchElementException e){
-			System.out.println("\"Find the Right Loan for You Page\" navigate button not found");
+			logger.info("\"Find the Right Loan for You Page\" navigate button not found");
 		}
 		return this.driver;
 	}
